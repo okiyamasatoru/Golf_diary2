@@ -1,0 +1,15 @@
+<div>
+  <h3><%= @customer.name %></h3>
+  <%= image_tag @customer.get_profile_image(80,80) %>
+</div>
+
+<!-- ユーザーの投稿一覧 -->
+
+<% @movies.each do |movie| %>
+<div>
+  <%= link_to public_movie_path(movie.id) do %>
+    <video src="<%= movie %>" type="video/mp4" controls></video>
+  <% end %>
+　<p>content：<%= movie.content %></p>
+</div>
+<% end %>
