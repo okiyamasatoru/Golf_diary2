@@ -1,0 +1,16 @@
+<% if customer == current_customer %>
+  <p><%= link_to "プロフィール編集", edit_public_customer_path(customer.id) %></p>
+  <% end %>
+  フォロー数: <%= link_to public_customer_followings_path(customer.id) do %>
+               <%= customer.followings.count %>
+               <% end %>
+  フォロワー数: <%= link_to public_customer_followers_path(customer.id) do %>
+                 <%= customer.followers.count %>
+                <% end %>
+  <% if customer != current_customer %>              
+    <% if current_customer.following?(customer) %>
+      <%= link_to "フォロー外す", public_customer_relationships_path(customer.id), method: :delete %>
+    <% else %>
+      <%= link_to "フォローする", public_customer_relationships_path(customer.id), method: :post %>
+    <% end %>
+  <% end %>

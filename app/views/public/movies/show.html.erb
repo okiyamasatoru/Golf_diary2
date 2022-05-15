@@ -1,6 +1,10 @@
 <div>
-  <p>ユーザー画像<%= image_tag 'no_image.jpg' %></p>
-  <p>name：<%= @movie.customer.name %></p>
+  <p><%= image_tag @movie.customer.get_profile_image(80,80)  %></p>
+  <p><%= link_to public_customer_path(@customer.id) do%>
+     <%= @movie.customer.name%>
+     <% end %>
+  </p>
+  
   <video src="<%= rails_blob_path(@movie.movie) %>" type="video/mp4" controls></video>
   <p>content：<%= @movie.content %></p>
   <p>投稿日：<%= @movie.created_at.strftime('%Y/%m/%d') %></p>
@@ -9,4 +13,23 @@
     <%= link_to "編集", edit_public_movie_path(@movie) %>
     <%= link_to "削除", public_movie_path(@movie), method: :delete %>
   <% end %>
+
+<div>
+  <%= render 'favorites', movie: @movie %>
+  <p>コメント件数：<%= @movie.comments.count %></p>
+  <% @movie.comments.each do |comment| %>
+    <p><%= image_tag comment.customer.get_profile_image(50,50) %></p>
+    <%= comment.customer.name %>
+    <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.comment %>
+    <% if comment.customer == current_customer %>
+      <%= link_to "削除", public_movie_comment_path(comment.movie,comment), method: :delete %>
+    <% end %>
+  <% end %>
+</div>
+<div>
+  <%= form_with model: [@movie, @comment], url:public_movie_comments_path(@movie) do |f| %>
+    <%= f.text_area :comment, rows: '5', placeholder: "コメントをここに" %>
+    <%= f.submit "送信する" %>
+  <% end %>
+</div>
 </div>

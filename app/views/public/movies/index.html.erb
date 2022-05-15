@@ -13,12 +13,13 @@
   <tbody>
     <% @movies.each do |movie| %>
       <tr>
-        <td><%= image_tag 'no_image.jpg' %></td>
+        <td><%= image_tag movie.customer.get_profile_image(80,80)  %></td>
+        <td><%= movie.customer.name %></td>
         <td><%= link_to public_movie_path(movie.id) do%>
-              <%= movie.customer.name %>
+              <%= movie.content%>
               <% end %>
         </td>
-        <td><%= movie.content %></td>
+        <td><%= link_to "#{movie.comments.count} コメント", public_movie_path(movie.id) %></td>
       </tr>
     <% end %>
   </tbody>

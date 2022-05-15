@@ -12,6 +12,8 @@ class Public::MoviesController < ApplicationController
 
   def show
     @movie = Movie.find(params[:id])
+    @comment = Comment.new
+    @customer = @movie.customer
   end
 
   def create
@@ -21,7 +23,7 @@ class Public::MoviesController < ApplicationController
       redirect_to public_movies_path
     else
       render :new
-    end  
+    end
   end
 
   def destroy
