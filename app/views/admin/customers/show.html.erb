@@ -1,21 +1,17 @@
 <div>
   <h3><%= @customer.name %></h3>
   <%= image_tag @customer.get_profile_image(80,80) %>
-  <%= render 'public/relationships/follow',customer: @customer %>
+  <%= link_to "編集", edit_admin_customer_path(@customer.id) %>
 </div>
 
 <!-- ユーザーの投稿一覧 -->
 <% @movies.each do |movie| %>
 <div>
-  <%= link_to public_movie_path(movie.id) do %>
+  <%= link_to admin_movie_path(movie.id) do %>
     <video src="<%= movie %>" type="video/mp4" controls></video>
   <% end %>
 　<p>content：<%= movie.content %></p>
 　<p><%= movie.created_at %></p>
-　<p><%= link_to "#{movie.comments.count} コメント", public_movie_path(movie.id) %></p>
+　<p><%= link_to "#{movie.comments.count} コメント", admin_movie_path(movie.id) %></p>
 </div>
-<% end %>
-
-<% if @customer == current_customer %>
-<%= link_to "退会", public_unsubscribe_path(@customer.id) %>
 <% end %>

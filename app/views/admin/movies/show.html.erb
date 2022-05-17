@@ -1,0 +1,23 @@
+<div>
+  <p><%= image_tag @movie.customer.get_profile_image(80,80)  %></p>
+  <p><%= link_to admin_customer_path(@customer.id) do%>
+     <%= @movie.customer.name%>
+     <% end %>
+  </p>
+  
+  <video src="<%= rails_blob_path(@movie.movie) %>" type="video/mp4" controls></video>
+  <p>content：<%= @movie.content %></p>
+  <p>投稿日：<%= @movie.created_at.strftime('%Y/%m/%d') %></p>
+   <%= link_to "一覧", admin_movies_path %>
+   <%= link_to "削除", admin_movie_path(@movie), method: :delete %>
+
+  <div>
+    <p>コメント件数：<%= @movie.comments.count %></p>
+    <% @movie.comments.each do |comment| %>
+      <p><%= image_tag comment.customer.get_profile_image(50,50) %></p>
+      <%= comment.customer.name %>
+      <%= comment.created_at.strftime('%Y/%m/%d') %><%= comment.comment %>
+        <%= link_to "削除", admin_movie_comment_path(comment.movie,comment), method: :delete %>
+    <% end %>
+  </div>
+</div>

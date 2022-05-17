@@ -1,0 +1,25 @@
+
+    <h3 class="bg-light"><%= @customer.name %>の会員情報編集</h1>
+
+    <%= form_with model: @customer,url:admin_customer_path(@customer.id) do |f| %>
+    <table class= "table table-borderless">
+        <tr>
+         <td>名前</td>
+         <td><%= @customer.name %></td>
+        </tr>
+        <tr>
+         <td>会員ステータス</td>
+         <td>
+             <%= f.radio_button :is_deleted, :true %>
+             <%= f.label :is_deleted, "退会", {value: :true, style: "display: inline-block;"} %>
+
+             <%= f.radio_button :is_deleted, :false %>
+             <%= f.label :is_deleted, "有効", {value: :false, style: "display: inline-block;"} %>
+         </td>
+        </tr>
+        <tr>
+         <td></td>
+         <td><%= f.submit "変更を保存",class: "btn btn-success" %></td>
+        </tr>
+    </table>
+    <% end %>
