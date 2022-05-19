@@ -1,32 +1,18 @@
-<h1>Movies</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th></th>
-      <th>name</th>
-      <th>Content</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @movies.each do |movie| %>
-      <tr>
-        <td><%= image_tag movie.customer.get_profile_image(80,80)  %></td>
-        <td><%= movie.customer.name %></td>
-        <td><%= link_to public_movie_path(movie.id) do%>
-              <%= movie.content%>
-              <% end %>
-        </td>
-        <td><%= link_to "#{movie.comments.count} コメント", public_movie_path(movie.id) %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
 <% if customer_signed_in? %>
 <%= link_to 'New Movie', new_public_movie_path %>
 <% end %>
+
+<div class="card-list-containar py-5">
+   <% @movies.each do |movie| %>
+        <div class="col-2">
+          <%=  image_tag movie.customer.get_profile_image(80,80), class:"mt-3 rounded-circle";  %>
+        </div>
+          <p class="card-text">説明：<%=  link_to public_movie_path(movie.id) do %>
+            <%= movie.content %>
+            <% end %>
+          </p>
+          <span><i class="fas fa-user"></i> By <%= movie.customer.name %> ｜ </span>
+          <span><%= link_to "#{movie.comments.count} コメント", public_movie_path(movie.id), class:"text-dark" %></span>
+    <% end %>      
+</div>
+
