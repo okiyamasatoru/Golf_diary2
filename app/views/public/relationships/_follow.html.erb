@@ -1,10 +1,10 @@
 <% if customer == current_customer %>
-  <p><%= link_to "プロフィール編集", edit_public_customer_path(customer.id) %></p>
+  <p><%= link_to "プロフィール編集", edit_public_customer_path(customer.id), class:"text-dark" %></p>
   <% end %>
-  フォロー数: <%= link_to public_customer_followings_path(customer.id) do %>
+  フォロー中: <%= link_to public_customer_followings_path(customer.id) do %>
                <%= customer.followings.count %>
                <% end %>
-  フォロワー数: <%= link_to public_customer_followers_path(customer.id) do %>
+  フォロワー: <%= link_to public_customer_followers_path(customer.id) do %>
                  <%= customer.followers.count %>
                 <% end %>
   <% if customer != current_customer %>              

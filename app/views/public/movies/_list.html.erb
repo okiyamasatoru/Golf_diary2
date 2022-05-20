@@ -1,5 +1,5 @@
 <div class="card-list-containar py-5">
-  <% @movies.each do |movie| %>
+  <% movies.each do |movie| %>
   <div class="card w-50 mx-auto mt-4 shadow-lg">
     <video src="<%= movie %>" type="video/mp4" controls></video>
     <div class="card-body">
@@ -23,5 +23,3 @@
   </div>
   <% end %>
 </div>
-
-

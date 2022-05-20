@@ -1,10 +1,1 @@
-<div class="card-list-containar py-5">
-   <% @customers.each do |customer| %>
-        <div class="col-2">
-          <%= image_tag customer.get_profile_image(80,80), class:"mt-3 rounded-circle";  %>
-        </div>
-          <p class="card-text">name：<%= link_to public_customer_path(customer.id) do%>
-              <%= customer.name %>
-              <% end %>
-    <% end %>      
-</div>
+<%= render 'list', movies: @movies %>

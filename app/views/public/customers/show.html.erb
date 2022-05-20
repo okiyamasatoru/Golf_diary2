@@ -1,20 +1,16 @@
-<div>
-  <h3><%= @customer.name %></h3>
-  <%= image_tag @customer.get_profile_image(80,80) %>
-  <%= render 'public/relationships/follow',customer: @customer %>
+<div class="profile-container w-75 d-flex mx-auto justify-content-around align-items-center border-bottom py-5">
+  <%= image_tag @customer.get_profile_image(80,80),class:"rounded-circle"; %>
+ <h5 class="profile-name display-4"><%= @customer.name %></h5>
+ <% if @customer.id == current_customer.id %>
+    <div class="mt-auto">
+    　<%= render 'public/relationships/follow',customer: @customer %>
+    </div>
+ <% end %>
 </div>
 
+
 <!-- ユーザーの投稿一覧 -->
-<% @movies.each do |movie| %>
-<div>
-  <%= link_to public_movie_path(movie.id) do %>
-    <video src="<%= movie %>" type="video/mp4" controls></video>
-  <% end %>
-　<p>content：<%= movie.content %></p>
-　<p><%= movie.created_at %></p>
-　<p><%= link_to "#{movie.comments.count} コメント", public_movie_path(movie.id) %></p>
-</div>
-<% end %>
+<%= render 'public/movies/list', movies: @movies %>
 
 <% if @customer == current_customer %>
 <%= link_to "退会", public_unsubscribe_path(@customer.id) %>
