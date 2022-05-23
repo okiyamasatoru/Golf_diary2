@@ -8,29 +8,32 @@
         </div>
         <p class="card-title">説明：<%= @movie.content %></p>
         <span><i class="fas fa-user"></i> By <%= @movie.customer.name %> ｜ </span>
-          <span><i class="fa fa-calendar"></i> <%= @movie.created_at.strftime('%Y/%m/%d') %> ｜ </span>
-          <span><i class="fa fa-comment"></i> <%= link_to "#{@movie.comments.count}", public_movie_path(@movie.id), class:"text-dark" %> ｜ </span>
-            <%= render 'favorites', movie: @movie %>
-            <% if @movie.customer == current_customer %>
-            <span> ｜ </span><%= link_to "削除", public_customer_path(@movie), class:"text-dark", method: :delete %>
-           <% end %>
+        <span><i class="fa fa-calendar"></i> <%= @movie.created_at.strftime('%Y/%m/%d') %> ｜ </span>
+        <span><i class="fa fa-comment"></i> <%= link_to "#{@movie.comments.count}", public_movie_path(@movie.id), class:"text-dark" %> ｜ </span>
+        <span id="favorite_buttons_<%= @movie.id %>">
+        <%= render 'public/favorites/favorites', movie: @movie %>
+        </span>
+
+        <% if @movie.customer == current_customer %>
+          <span> ｜ </span><%= link_to "削除", public_customer_path(@movie), class:"text-dark", method: :delete %>
+      <% end %>
       </div>
     </div>
     <hr>
     <div class="comments card-text">
       <h4 class="mt-3"><%= @movie.comments.count %>件コメント</h4>
       <% @movie.comments.each do |comment| %>
-       <div class="media border mb-3">
-         <%= image_tag comment.customer.get_profile_image(50,50), class:"bd-placeholder-img align-self-center mx-3"; %>
-         <div class="media-body ml-4 p-3">
-           <p><%= comment.created_at.strftime('%Y/%m/%d') %></p>
-           <p><%= comment.comment %></p>
-           <% if comment.customer == current_customer %>
-             <%= link_to "削除", public_movie_comment_path(comment.movie,comment), method: :delete, class: "btn btn-danger pull-right" %>
-           <% end %>
-         </div>
-       </div>
-      <% end %> 
+        <div class="media border mb-3">
+          <%= image_tag comment.customer.get_profile_image(50,50), class:"bd-placeholder-img align-self-center mx-3"; %>
+          <div class="media-body ml-4 p-3">
+            <p><%= comment.created_at.strftime('%Y/%m/%d') %></p>
+            <p><%= comment.comment %></p>
+            <% if comment.customer == current_customer %>
+              <%= link_to "削除", public_movie_comment_path(comment.movie,comment), method: :delete, class: "btn btn-danger pull-right" %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
     </div>
     <hr>
     <div class="new-comment card-text">
@@ -41,7 +44,7 @@
         </div>
         <%= f.submit "送信する", class:"btn btn-lg btn-info mt-2 float-right" %>
       <% end %>
-      </div>
     </div>
   </div>
+</div>
 </div>
