@@ -2,11 +2,11 @@
 
 class Public::SessionsController < Devise::SessionsController
    def after_sign_in_path_for(resource)
-    root_path
+    public_customer_path(current_customer)
    end
    
    def after_sign_out_path_for(resource)
-    about_path
+    new_customer_session_path
    end
   # before_action :configure_sign_in_params, only: [:create]
 

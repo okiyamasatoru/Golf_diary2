@@ -1,16 +1,16 @@
 <div class="card-list-containar py-5">
   <% movies.each do |movie| %>
   <div class="card w-50 mx-auto mt-4 shadow-lg">
-    <%= video_tag rails_blob_path(movie.movie) %>
+    <%=  link_to public_movie_path(movie.id) do %>
+    <%= video_tag rails_blob_path(movie.movie),size: '320x240' %>
+    <% end %>
     <div class="card-body">
       <div class="row">
         <div class="col-2">
           <%= image_tag movie.customer.get_profile_image(80,80), class:"mt-3 rounded-circle";  %>
         </div>
         <div class="col-10">
-          <p class="card-text">説明：<%=  link_to public_movie_path(movie.id) do %>
-              <%= movie.content %>
-              <% end %>
+          <p class="card-text">content：<%= movie.content %>
           </p>
           <span><i class="fas fa-user"></i> By <%= link_to public_customer_path(movie.customer) do %>
               <%= movie.customer.name  %>

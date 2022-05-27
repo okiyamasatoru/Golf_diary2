@@ -1,5 +1,5 @@
 class Public::MoviesController < ApplicationController
-   before_action :authenticate_customer!
+   before_action :authenticate_customer!, only: [:new, :index, :show, :create, :destroy]
   def new
     @movie = Movie.new
   end

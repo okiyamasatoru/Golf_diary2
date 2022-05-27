@@ -1,0 +1,25 @@
+<section class="wrapper flex">
+	<div class="content">
+		<div class="mv">
+			<div class="col-md-6 mx-auto mt-5">
+        <h1>welcome to <strong>Golf_daiary</strong>  !!</span></h1>
+        <p>
+  				このサイトは、ゴルフ動画でつながるSNSです。<br>
+  				会員でない方も動画の閲覧はできますが、<br>
+  				機能を使うためには会員登録が必要になります。
+  			</p>
+        <div class="row">
+         <p class="ml-3"><a class="btn btn-info" href="/customers/sign_in">Log in</a></p>
+         <p class="ml-3"><a class="btn btn-success" href="/customers/sign_up">Sign Up</a></p>
+        </div>
+      </div>
+		</div>
+		<div class="items">
+			<% @random.each do |movie| %>
+				<%= link_to public_random_path do %>
+					<%= video_tag rails_blob_path(movie.movie),size: '320x240' %>
+				<% end %>
+			<% end %>
+		</div>
+	</div>
+</section>

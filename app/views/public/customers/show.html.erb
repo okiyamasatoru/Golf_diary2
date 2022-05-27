@@ -1,3 +1,4 @@
+<% if @customer.is_deleted == false %>
 <div class="profile-container w-75 d-flex mx-auto justify-content-around align-items-center border-bottom py-5">
   <%= image_tag @customer.get_profile_image(80,80),class:"rounded-circle"; %>
  <h5 class="profile-name display-4"><%= @customer.name %></h5>
@@ -12,4 +13,9 @@
 
 <% if @customer == current_customer %>
 <%= link_to "退会", public_unsubscribe_path(@customer.id) %>
+<% end %>
+
+<% else %>
+退会済みのユーザー
+
 <% end %>
