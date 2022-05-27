@@ -1,33 +1,35 @@
 <h2>Results index</h2>
 
 <table class="table table-hover table-inverse">
-  <!--検索対象モデルがCustomerの時 -->
-  <% if @range == "Customer" %>
-    <tbody>
-      <% @customers.each do |customer| %>
-        <tr>
-        <td><%= image_tag customer.get_profile_image(80,80)  %></td>
-        <td><%= link_to public_customer_path(customer.id) do%>
-              <%= customer.name %>
-              <% end %>
-        </td>
-      </tr>
-      <% end %>
-    </tbody>
-  <% else %>
-    
-    <tbody>
-      <% @movies.each do |movie| %>
-        <tr>
-        <td><%= image_tag movie.customer.get_profile_image(80,80)  %></td>
-        <td><%= movie.customer.name %></td>
-        <td><%= link_to public_movie_path(movie.id) do%>
-              <%= movie.content%>
-              <% end %>
-        </td>
-        <td><%= link_to "#{movie.comments.count} コメント", public_movie_path(movie.id) %></td>
-      </tr>
-      <% end %>
-    </tbody>
-  <% end %>
+  <% if @customers.is_deleted == true %>
+    <!--検索対象モデルがCustomerの時 -->
+    <% if @range == "Customer" %>
+      <tbody>
+        <% @customers.each do |customer| %>
+          <tr>
+          <td><%= image_tag customer.get_profile_image(80,80)  %></td>
+          <td><%= link_to public_customer_path(customer.id) do%>
+                <%= customer.name %>
+                <% end %>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    <% else %>
+      
+      <tbody>
+        <% @movies.each do |movie| %>
+          <tr>
+          <td><%= image_tag movie.customer.get_profile_image(80,80)  %></td>
+          <td><%= movie.customer.name %></td>
+          <td><%= link_to public_movie_path(movie.id) do%>
+                <%= movie.content%>
+                <% end %>
+          </td>
+          <td><%= link_to "#{movie.comments.count} コメント", public_movie_path(movie.id) %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    <% end %>
+  <% end %>  
 </table>

@@ -1,5 +1,5 @@
 <div class="card-list-containar py-5">
-  <% @movie.each do |movie| %>
+  <%@favorite_movies.each do |movie| %>
   <div class="card w-50 mx-auto mt-4 shadow-lg">
     <%= video_tag rails_blob_path(movie.movie) %>
     <div class="card-body">
@@ -23,5 +23,3 @@
   </div>
   <% end %>
 </div>
-
-

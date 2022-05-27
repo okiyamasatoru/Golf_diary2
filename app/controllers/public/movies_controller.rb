@@ -6,9 +6,11 @@ class Public::MoviesController < ApplicationController
 
   def index
     @movies = Movie.all
+    @movie = Movie.where(customer_id: [*current_customer.following_ids])
   end
 
-  def edit
+  def random
+    @random = Movie.order("RANDOM()").limit(5)
   end
 
   def show

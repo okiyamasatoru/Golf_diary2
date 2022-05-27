@@ -26,7 +26,13 @@
               <%= link_to "マイページ",public_customer_path(current_customer.id),class: 'nav-link text-dark' %>
             </li>
             <li class="nav-item">
-              <%= link_to "動画一覧",public_movies_path,class: 'nav-link text-dark' %>
+              <%= link_to "フォロー動画",public_movies_path,class: 'nav-link text-dark'%>
+            </li>
+            <li class="nav-item">
+              <%= link_to "おすすめ動画",public_random_path,class: 'nav-link text-dark' %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "お気に入り動画",favorites_public_customer_path(current_customer),class: 'nav-link text-dark' %>
             </li>
             <li class="nav-item">
               <%= link_to "新規投稿", new_public_movie_path,class: 'nav-link text-dark' %>

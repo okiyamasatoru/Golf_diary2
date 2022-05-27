@@ -18,6 +18,11 @@ class Public::CustomersController < ApplicationController
   def index
     @customers = Customer.all
   end
+  def favorites
+    @customer = Customer.find(params[:id])
+    favorites= Favorite.where(customer_id: @customer.id).pluck(:movie_id)
+    @favorite_movies = Movie.find(favorites)
+  end
 
   def withdrawal
     @customer = current_customer

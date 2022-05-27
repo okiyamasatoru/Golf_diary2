@@ -7,15 +7,19 @@ Rails.application.routes.draw do
      get "search" => "searches#search" 
   end
   namespace :public do
-    resources :movies, only: [:new, :index, :show, :create, :edit,:destroy] do
+    resources :movies, only: [:new, :index, :show, :create, :destroy] do
      resources :comments, only: [:create, :destroy]
      resource :favorites, only: [:create, :destroy]
     end
     resources :customers, only: [:show, :edit, :index, :update] do
      resource :relationships, only: [:create, :destroy]
+     member do
+      get :favorites
+     end
      get 'followings' => 'relationships#followings', as: 'followings'
      get 'followers' => 'relationships#followers', as: 'followers'
-    end
+    end 
+    get"random" => "movies#random"
     get "search" => "searches#search"
     # 退会確認画面
     get '/customers/:id/unsubscribe' => 'customers#unsubscribe', as: 'unsubscribe'

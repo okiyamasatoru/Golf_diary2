@@ -1,12 +1,10 @@
 <div class="profile-container w-75 d-flex mx-auto justify-content-around align-items-center border-bottom py-5">
   <%= image_tag @customer.get_profile_image(80,80),class:"rounded-circle"; %>
  <h5 class="profile-name display-4"><%= @customer.name %></h5>
- <% if @customer.id == current_customer.id %>
-    <div class="mt-auto">
+ 　　<div class="mt-auto">
     　<%= render 'public/relationships/follow',customer: @customer %>
     </div>
- <% end %>
-</div>
+ </div>
 
 
 <!-- ユーザーの投稿一覧 -->
