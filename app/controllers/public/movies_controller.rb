@@ -5,7 +5,7 @@ class Public::MoviesController < ApplicationController
   end
 
   def index
-    @movies = Movie.all
+    @movies = Movie.page(params[:page])
     @movie = Movie.where(customer_id: [*current_customer.following_ids])
   end
 
@@ -23,7 +23,7 @@ class Public::MoviesController < ApplicationController
     @movie = Movie.new(movie_params)
     @movie.customer_id = current_customer.id
     if @movie.save
-      redirect_to public_movies_path
+      redirect_to public_customer_path(current_customer.id)
     else
       render :new
     end
@@ -32,7 +32,7 @@ class Public::MoviesController < ApplicationController
   def destroy
     @movie = Movie.find(params[:id])
     @movie.destroy
-    redirect_to public_movies_path
+    redirect_to public_customer_path(current_customer.id)
   end
 
    private

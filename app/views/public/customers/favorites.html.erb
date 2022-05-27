@@ -8,7 +8,7 @@
           <%= image_tag movie.customer.get_profile_image(80,80), class:"mt-3 rounded-circle";  %>
         </div>
         <div class="col-10">
-          <p class="card-text">説明：<%=  link_to public_movie_path(movie.id) do %>
+          <p class="card-text">content：<%=  link_to public_movie_path(movie.id) do %>
               <%= movie.content %>
               <% end %>
           </p>

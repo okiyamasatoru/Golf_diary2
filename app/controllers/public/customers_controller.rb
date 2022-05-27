@@ -2,7 +2,7 @@ class Public::CustomersController < ApplicationController
   before_action :authenticate_customer!
   def show
     @customer = Customer.find(params[:id])
-    @movies = @customer.movies
+    @movies = @customer.movies.page(params[:page])
   end
 
   def edit
