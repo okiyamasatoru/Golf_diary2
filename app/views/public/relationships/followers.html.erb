@@ -1,3 +1,15 @@
-<% @customers.each do |customer| %>
-  <% customer.name %>
-<% end %>
+<h2 class="text-center">フォロワ一覧</h2>  
+  <table class="table table-hover table-inverse">
+    <tbody class="text-center">
+      <% @customers.each do |customer| %>
+        <tr>
+          <td><%= image_tag customer.get_profile_image(50,50)  %></td>
+          <td>
+            <%= link_to public_customer_path(customer.id) do %>
+             <% customer.name %>
+            <% end %> 
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>  
