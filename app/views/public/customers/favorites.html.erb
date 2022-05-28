@@ -1,22 +1,21 @@
 <div class="card-list-containar py-5">
   <%@favorite_movies.each do |movie| %>
   <div class="card w-50 mx-auto mt-4 shadow-lg">
-    <%= video_tag rails_blob_path(movie.movie) %>
+     <%=  link_to public_movie_path(movie.id) do %>
+      <%= video_tag rails_blob_path(movie.movie), class: "w-100" %>
+    <% end %>
     <div class="card-body">
       <div class="row">
         <div class="col-2">
           <%= image_tag movie.customer.get_profile_image(80,80), class:"mt-3 rounded-circle";  %>
         </div>
         <div class="col-10">
-          <p class="card-text">content：<%=  link_to public_movie_path(movie.id) do %>
-              <%= movie.content %>
-              <% end %>
-          </p>
           <span><i class="fas fa-user"></i> By <%= link_to public_customer_path(movie.customer) do %>
               <%= movie.customer.name  %>
               <% end %>｜
           </span>
           <span><i class="fa fa-comment"></i> <%= link_to "#{movie.comments.count}コメント", public_movie_path(movie.id), class:"text-dark" %> ｜ </span>
+          <p class="card-text">content：<%= movie.content %></p>
         </div>
       </div>
     </div>

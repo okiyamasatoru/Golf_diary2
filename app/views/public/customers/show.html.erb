@@ -11,10 +11,6 @@
 <!-- ユーザーの投稿一覧 -->
 <%= render 'public/movies/list', movies: @movies %>
 
-<% if @customer == current_customer %>
-<%= link_to "退会", public_unsubscribe_path(@customer.id) %>
-<% end %>
-
 <% else %>
 退会済みのユーザー
 
