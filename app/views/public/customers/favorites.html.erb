@@ -6,9 +6,6 @@
     <% end %>
     <div class="card-body">
       <div class="row">
-        <div class="col-2">
-          <%= image_tag movie.customer.get_profile_image(80,80), class:"mt-3 rounded-circle";  %>
-        </div>
         <div class="col-10">
           <span><i class="fas fa-user"></i> By <%= link_to public_customer_path(movie.customer) do %>
               <%= movie.customer.name  %>

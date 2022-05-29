@@ -12,7 +12,7 @@ class Admin::MoviesController < ApplicationController
   def destroy
     @movie = Movie.find(params[:id])
     @movie.destroy
-    redirect_to admin_movies_path
+    redirect_to admin_customer_path(@customer.id)
   end
   
    private
