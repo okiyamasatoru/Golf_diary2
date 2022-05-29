@@ -5,19 +5,19 @@
       <div class="row">
         <span><%= image_tag @movie.customer.get_profile_image(30,30), class:"rounded-circle"; %>
             <%= link_to public_customer_path(@movie.customer_id) do %>
-              <%= @movie.customer.name %> 
-            <% end %>｜ 
+              <%= @movie.customer.name %>
+            <% end %>｜
         </span>
         <span><i class="fa fa-calendar"></i> <%= @movie.created_at.strftime('%Y/%m/%d') %> ｜ </span>
         <span><i class="fa fa-comment"></i> <%= link_to "#{@movie.comments.count}", public_movie_path(@movie.id), class:"text-dark" %> ｜ </span>
         <span id="favorite_buttons_<%= @movie.id %>">
-        <%= render 'public/favorites/favorites', movie: @movie %>
+         <%= render 'public/favorites/favorites', movie: @movie %>
         </span>
-        </div>
-        <h6 class="card-title">content：<%= @movie.content %></h6>
         <% if @movie.customer == current_customer %>
           <span> ｜ </span><%= link_to "削除", public_movie_path(@movie), class:"text-dark", method: :delete, "data-confirm" => "本当に削除しますか？"%>
         <% end %>
+        </div>
+        <h6 class="card-title"><%=safe_join(@movie.content.split("\n"),tag(:br))%></h6>
     </div>
     <hr>
     <div class="comments card-text">
