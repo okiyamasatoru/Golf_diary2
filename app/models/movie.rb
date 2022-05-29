@@ -16,6 +16,14 @@ class Movie < ApplicationRecord
     end
   end
   
+  def self.random_movie
+    if Rails.env.production?
+      order("RAND()")
+    else
+      order("RANDOM()")
+    end
+  end
+  
   def favorited_by?(customer)
     favorites.exists?(customer_id: customer.id)
   end
