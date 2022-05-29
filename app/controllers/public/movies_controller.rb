@@ -10,7 +10,7 @@ class Public::MoviesController < ApplicationController
   end
 
   def random
-    @random = Movie.order("RAND()").limit(5)
+    @rand = Movie.order("RAND()").limit(5)
   end
 
   def show

@@ -15,9 +15,9 @@
       </div>
 		</div>
 		<div class="items">
-			<% @random.each do |movie| %>
+			<% @rand.each do |movie| %>
 				<%= link_to public_random_path do %>
-					<%= video_tag rails_blob_path(movie.movie),size: '320x475' %>
+					<%= video_tag rails_blob_path(movie.movie),size: '350x350' %>
 				<% end %>
 			<% end %>
 		</div>

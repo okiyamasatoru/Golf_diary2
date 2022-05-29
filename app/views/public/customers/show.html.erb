@@ -1,7 +1,9 @@
 <% if @customer.is_deleted == false %>
 <div class="profile-container w-75 d-flex mx-auto justify-content-around align-items-center border-bottom py-5">
-  <%= image_tag @customer.get_profile_image(80,80),class:"rounded-circle"; %>
- 　<div class="profile-name display-4"><%= @customer.name %></div>
+  <P>
+    <%= image_tag @customer.get_profile_image(80,80),class:"rounded-circle"; %>
+ 　<span class="text-center d-block"><%= @customer.name %></span>
+  </P>
  　　<div class="mt-auto">
     　<%= render 'public/relationships/follow',customer: @customer %>
     </div>
