@@ -22,14 +22,18 @@ class Movie < ApplicationRecord
   private
 
   def movie_type
-    if !movie.blob.content_type.in?(%('video/quicktime video/quicktime'))
-        errors.add(:video, '動画は携帯で撮影したmov形式でアップロードしてください')
+    if movie.blob != nil
+     if !movie.blob.content_type.in?(%('video/quicktime video/quicktime'))
+       errors.add(:video, '動画は携帯で撮影したmov形式でアップロードしてください')
+     end   
     end
   end
 
   def movie_size
-    if movie.blob.byte_size > 15.megabytes
-      errors.add(:video, "動画を短く撮影し直してください(15MB以内)")
-    end
+    if movie.blob != nil
+      if movie.blob.byte_size > 15.megabytes
+        errors.add(:video, "動画を短く撮影し直してください(15MB以内)")
+      end
+    end  
   end
 end

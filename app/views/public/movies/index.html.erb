@@ -1,3 +1,23 @@
-<%= render 'public/movies/list', movies: @movies %>
+<div class="card-list-containar py-5">
+  <% @movie.each do |movie| %>
+  <div class="card w-50 mx-auto mt-4 shadow-lg">
+    <%=  link_to public_movie_path(movie.id) do %>
+      <%= video_tag rails_blob_path(movie.movie), class: "w-100" %>
+    <% end %>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-10">
+         <span><i class="fas fa-user"></i> By <%= link_to public_customer_path(movie.customer) do %>
+              <%= movie.customer.name  %>
+              <% end %>｜
+          </span>
+          <span><i class="fa fa-comment"></i> <%= link_to "#{movie.comments.count}コメント", public_movie_path(movie.id), class:"text-dark" %> ｜ </span>
+          <p class="card-text">content：<%= movie.content %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>
 
 
