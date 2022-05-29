@@ -1,6 +1,6 @@
 <div class="card-list-containar py-5">
   <%@favorite_movies.each do |movie| %>
-  <div class="card w-50 mx-auto mt-4 shadow-lg">
+  <div class="card w-100 mx-auto mt-4 shadow-lg">
      <%=  link_to public_movie_path(movie.id) do %>
       <%= video_tag rails_blob_path(movie.movie), class: "w-100" %>
     <% end %>
