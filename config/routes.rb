@@ -4,7 +4,7 @@ Rails.application.routes.draw do
      resources :movies, only: [:show, :index, :destroy] do
        resources :comments, only: [:create, :destroy]
      end
-     get "search" => "searches#search" 
+     get "search" => "searches#search"
   end
   namespace :public do
     resources :movies, only: [:new, :index, :show, :create, :destroy] do
@@ -18,7 +18,7 @@ Rails.application.routes.draw do
      end
      get 'followings' => 'relationships#followings', as: 'followings'
      get 'followers' => 'relationships#followers', as: 'followers'
-    end 
+    end
     get"random" => "movies#random"
     get "search" => "searches#search"
     # 退会確認画面
@@ -33,6 +33,6 @@ Rails.application.routes.draw do
   registrations: "public/registrations",
   sessions: 'public/sessions'
 }
- root to: "homes#top"
+ root to: "public/homes#top"
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
