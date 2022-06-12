@@ -7,7 +7,6 @@ Rails.application.routes.draw do
      get "search" => "searches#search" 
   end
   namespace :public do
-   root to: "homes#top"
     resources :movies, only: [:new, :index, :show, :create, :destroy] do
      resources :comments, only: [:create, :destroy]
      resource :favorites, only: [:create, :destroy]
@@ -34,5 +33,6 @@ Rails.application.routes.draw do
   registrations: "public/registrations",
   sessions: 'public/sessions'
 }
+ root to: "homes#top"
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
