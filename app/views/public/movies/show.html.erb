@@ -1,50 +1,55 @@
-<div class="post-detail py-5 bg-light">
-  <div class="card w-75 mx-auto mt-4 shadow-lg">
-    <video src="<%= rails_blob_path(@movie.movie) %>" type="video/mov" controls></video>
-    <div class="card-body">
-      <div class="row">
-        <span><%= image_tag @movie.customer.get_profile_image(30,30), class:"rounded-circle"; %>
-            <%= link_to public_customer_path(@movie.customer_id) do %>
-              <%= @movie.customer.name %>
-            <% end %>｜
-        </span>
-        <span><i class="fa fa-calendar"></i> <%= @movie.created_at.strftime('%Y/%m/%d') %> ｜ </span>
-        <span><i class="fa fa-comment"></i> <%= link_to "#{@movie.comments.count}", public_movie_path(@movie.id), class:"text-dark" %> ｜ </span>
-        <span id="favorite_buttons_<%= @movie.id %>">
-         <%= render 'public/favorites/favorites', movie: @movie %>
-        </span>
-        <% if @movie.customer == current_customer %>
-          <span> ｜ </span><%= link_to "削除", public_movie_path(@movie), class:"text-dark", method: :delete, "data-confirm" => "本当に削除しますか？"%>
-        <% end %>
-        </div>
-        <h6 class="card-title"><%=safe_join(@movie.content.split("\n"),tag(:br))%></h6>
-    </div>
-    <hr>
-    <div class="comments card-text">
-      <h4 class="mt-3"><%= @movie.comments.count %>件コメント</h4>
-      <% @movie.comments.each do |comment| %>
-        <div class="media border mb-3">
-          <%= image_tag comment.customer.get_profile_image(50,50), class:"bd-placeholder-img align-self-center mx-3"; %>
-          <div class="media-body ml-4 p-3">
-            <p><%= comment.created_at.strftime('%Y/%m/%d') %></p>
-            <p><%= comment.comment %></p>
-            <% if comment.customer == current_customer %>
-              <%= link_to "削除", public_movie_comment_path(comment.movie,comment), method: :delete,"data-confirm" => "本当に削除しますか？", class: "btn btn-danger pull-right" %>
-            <% end %>
+<% if @movie.customer.is_deleted == false %>
+  <div class="post-detail py-5 bg-light">
+    <div class="card w-75 mx-auto mt-4 shadow-lg">
+      <video src="<%= rails_blob_path(@movie.movie) %>" type="video/mov" controls></video>
+      <div class="card-body">
+        <div class="row">
+          <span><%= image_tag @movie.customer.get_profile_image(30,30), class:"rounded-circle"; %>
+              <%= link_to public_customer_path(@movie.customer_id) do %>
+                <%= @movie.customer.name %>
+              <% end %>｜
+          </span>
+          <span><i class="fa fa-calendar"></i> <%= @movie.created_at.strftime('%Y/%m/%d') %> ｜ </span>
+          <span><i class="fa fa-comment"></i> <%= link_to "#{@movie.comments.count}", public_movie_path(@movie.id), class:"text-dark" %> ｜ </span>
+          <span id="favorite_buttons_<%= @movie.id %>">
+           <%= render 'public/favorites/favorites', movie: @movie %>
+          </span>
+          <% if @movie.customer == current_customer %>
+            <span> ｜ </span><%= link_to "削除", public_movie_path(@movie), class:"text-dark", method: :delete, "data-confirm" => "本当に削除しますか？"%>
+          <% end %>
           </div>
-        </div>
-      <% end %>
-    </div>
-    <hr>
-    <div class="new-comment card-text">
-      <%= form_with model: [@movie, @comment], url:public_movie_comments_path(@movie) do |f| %>
-        <div class="form-group">
-          <label for="exampleFormControlTextarea1">コメントする</label>
-          <%= f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントをここに" %>
-        </div>
-        <%= f.submit "送信する", class:"btn btn-lg btn-info mt-2 float-right" %>
-      <% end %>
+          <h6 class="card-title"><%=safe_join(@movie.content.split("\n"),tag(:br))%></h6>
+      </div>
+      <hr>
+      <div class="comments card-text">
+        <h4 class="mt-3"><%= @movie.comments.count %>件コメント</h4>
+        <% @movie.comments.each do |comment| %>
+          <div class="media border mb-3">
+            <%= image_tag comment.customer.get_profile_image(50,50), class:"bd-placeholder-img align-self-center mx-3"; %>
+            <div class="media-body ml-4 p-3">
+              <p><%= comment.created_at.strftime('%Y/%m/%d') %></p>
+              <p><%= comment.comment %></p>
+              <% if comment.customer == current_customer %>
+                <%= link_to "削除", public_movie_comment_path(comment.movie,comment), method: :delete,"data-confirm" => "本当に削除しますか？", class: "btn btn-danger pull-right" %>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      <hr>
+      <div class="new-comment card-text">
+        <%= form_with model: [@movie, @comment], url:public_movie_comments_path(@movie) do |f| %>
+          <div class="form-group">
+            <label for="exampleFormControlTextarea1">コメントする</label>
+            <%= f.text_area :comment, rows:'5', class: "form-control",placeholder: "コメントをここに" %>
+          </div>
+          <%= f.submit "送信する", class:"btn btn-lg btn-info mt-2 float-right" %>
+        <% end %>
+      </div>
     </div>
   </div>
-</div>
-</div>
+  </div>
+  <% else %>
+  <h2 class="text-center">退会済みのユーザー</h2>
+
+<% end %>

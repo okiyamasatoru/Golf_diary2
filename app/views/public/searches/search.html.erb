@@ -5,6 +5,7 @@
     <% if @range == "Customer" %>
       <tbody class="text-center">
         <% @customers.each do |customer| %>
+        <% if customer.is_deleted == false %>
           <tr>
             <td><%= image_tag customer.get_profile_image(50,50)  %></td>
             <td>
@@ -13,12 +14,14 @@
               <% end %>
             </td>
           </tr>
+        <% end %>  
         <% end %>
       </tbody>
     <% else %>
 
       <tbody class="text-center">
         <% @movies.each do |movie| %>
+        <% if movie.customer.is_deleted == false %>
           <tr>
           <td><%= image_tag movie.customer.get_profile_image(50,50)  %></td>
           <td><%= movie.customer.name %></td>
@@ -28,6 +31,7 @@
             <% end %>
           </td>
         </tr>
+        <% end %>
         <% end %>
       </tbody>
     <% end %>

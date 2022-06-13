@@ -16,9 +16,11 @@
 		</div>
 		<div class="items">
 			<% @random.each do |movie| %>
+			<% if movie.customer.is_deleted == false %>
 				<%= link_to public_random_path do %>
 					<%= video_tag rails_blob_path(movie.movie),size: '350x350' %>
 				<% end %>
+			<% end %>
 			<% end %>
 		</div>
 	</div>

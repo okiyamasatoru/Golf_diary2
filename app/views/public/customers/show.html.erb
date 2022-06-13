@@ -1,19 +1,19 @@
 <% if @customer.is_deleted == false %>
-<div class="profile-container w-75 d-flex mx-auto justify-content-around align-items-center border-bottom py-5">
-  <P>
-    <%= image_tag @customer.get_profile_image(80,80),class:"rounded-circle"; %>
- 　<span class="text-center d-block"><%= @customer.name %></span>
-  </P>
- 　　<div class="mt-auto">
-    　<%= render 'public/relationships/follow',customer: @customer %>
-    </div>
- </div>
-
-
-<!-- ユーザーの投稿一覧 -->
-<%= render 'public/movies/list', movies: @movies %>
+  <div class="profile-container w-75 d-flex mx-auto justify-content-around align-items-center border-bottom py-5">
+    <P>
+      <%= image_tag @customer.get_profile_image(80,80),class:"rounded-circle"; %>
+   　<span class="text-center d-block"><%= @customer.name %></span>
+    </P>
+   　　<div class="mt-auto">
+      　<%= render 'public/relationships/follow',customer: @customer %>
+      </div>
+   </div>
+  
+  
+  <!-- ユーザーの投稿一覧 -->
+  <%= render 'public/movies/list', movies: @movies %>
 
 <% else %>
-<h2 class="text-center">退会済みのユーザー</h2>
+ <h2 class="text-center">退会済みのユーザー</h2>
 
 <% end %>
